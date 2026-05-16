@@ -1,0 +1,95 @@
+<!doctype html>
+<div class="layout">
+  <app-navigation-sidebar></app-navigation-sidebar>
+  @if (!isNoteSelected()) {
+    <div class="notes-section">
+      <button class="new-note-button" (click)="newNoteTouched.set(true)">Nueva nota</button>
+      <div class="notes-container">
+        @if (newNoteTouched()) {
+          <div class="new-note-container">
+            <div class="new-note">
+              <input type="text" placeholder="Título" #noteTitle />
+              <button (click)="createNote(noteTitle.value)">Crear</button>
+              <button (click)="newNoteTouched.set(false)">Cancelar</button>
+            </div>
+          </div>
+        }
+        @for (note of notes(); track note.id) {
+          <div class="note" (click)="selectNote(note)">
+            <h3>{{ note.title }}</h3>
+            <div class="note-buttons">
+              <button (click)="startRenaming(note.id, $event)">Renombrar</button>
+              <button (click)="deleteNote(note.id); $event.stopPropagation()">Eliminar</button>
+            </div>
+            @if (renamingNoteId() === note.id) {
+              <div class="rename-note-overlay" (click)="$event.stopPropagation()">
+                <div class="rename-note">
+                  <input type="text" placeholder="Nuevo título" [value]="note.title" #newTitle />
+                  <div class="rename-note-buttons">
+                    <button class="rename-confirm" (click)="renameNote(note.id, newTitle.value)">Renombrar</button>
+                    <button class="rename-cancel" (click)="renamingNoteId.set(null)">Cancelar</button>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+  } @else {
+    <div class="note-container">
+      @defer (when isNoteSelected()) {
+        <div class="editor-top">
+          <div class="editor-header">
+            <h3>{{ this.selectedNote()?.title }}</h3>
+            <div class="savedIndicator">
+              @if (unsavedChanges()) {
+                <div class="sphere" style="background-color: red"></div>
+                <p class="unsavedChanges">Sin guardar</p>
+              } @else {
+                <div class="sphere" style="background-color: green"></div>
+                <p class="savedChanges">Guardado</p>
+              }
+            </div>
+          </div>
+          <div class="editor-buttons">
+            <button type="button" (click)="saveNote()">Guardar</button>
+            <button type="button" (click)="exportToPDF()">
+              <img src="/Editor/export.png" alt="Exportar" />
+              Exportar PDF
+            </button>
+            <input
+              type="file"
+              style="display: none"
+              (change)="importFromWord($event)"
+              accept=".docx, application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+              value=""
+              #inputDocx
+            />
+            <button (click)="inputDocx.click()">
+              <img src="/Editor/import.png" alt="Importar" />
+              Importar
+            </button>
+          </div>
+        </div>
+        <quill-editor
+          #editor
+          class="editor"
+          placeholder="Inserta tu texto aquí..."
+          [modules]="quillConfig"
+          [ngModel]="editorContent()"
+          (ngModelChange)="editorContent.set($event)"
+        >
+        </quill-editor>
+      } @loading (minimum 500ms) {
+        <div class="editor-loading">
+          <img src="/Editor/loading.gif" alt="Loading" />
+        </div>
+      } @error {
+        <div class="editor-error">
+          <p>Error al cargar el editor</p>
+        </div>
+      }
+    </div>
+  }
+</div>

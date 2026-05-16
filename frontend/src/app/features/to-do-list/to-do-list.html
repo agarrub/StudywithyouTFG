@@ -1,0 +1,50 @@
+<app-navigation-sidebar />
+
+@if (this.list()) {
+  <div class="list-content">
+    <div class="list-header">
+      <input
+        type="text"
+        [value]="this.list()?.title"
+        (blur)="onUpdateTitle(titleInput.value)"
+        (keyup.enter)="onUpdateTitle(titleInput.value)"
+        #titleInput
+        class="title-input"
+        placeholder="Título de la lista"
+        maxlength="100"
+      />
+    </div>
+    <div class="list-tasks">
+      @for (item of this.tasks(); track item.id) {
+        <label class="task-item" [class.done]="item.done">
+          <input type="checkbox" [checked]="item.done" (change)="this.onToggleTask(item)" />
+          <span>{{ item.task }}</span>
+          <button (click)="this.onDeleteTask(item.id)">🗑️</button>
+        </label>
+      }
+
+      <label class="task-item write-task">
+        <input
+          type="checkbox"
+          disabled
+          class="invisible-check"
+          [class.show-checkbox]="newTask().length > 0"
+        />
+        <input
+          type="text"
+          placeholder="Escribe tu tarea"
+          [value]="newTask()"
+          (input)="newTask.set(taskValue.value)"
+          (keyup.enter)="this.onAddTask(taskValue.value)"
+          #taskValue
+          class="task-input"
+          autofocus
+        />
+      </label>
+    </div>
+  </div>
+} @else {
+  <div class="loading-state">
+    <p>Cargando lista de tareas...</p>
+  </div>
+}

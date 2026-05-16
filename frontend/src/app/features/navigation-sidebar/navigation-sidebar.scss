@@ -1,0 +1,64 @@
+$purple: #5601df;
+
+.sidebar {
+  background-color: white;
+  border-radius: 10px;
+  width: 120px;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-right: 1px solid black;
+}
+
+.sidebar ol li {
+  display: flex;
+  background: none;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  padding: 1rem;
+  list-style: none;
+  border: none;
+
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    color: $purple;
+
+    &:hover {
+      border: 1px solid $purple;
+      background-color: whitesmoke;
+      border-radius: 8px;
+      color: black;
+    }
+
+    img:hover {
+      filter: brightness(0) saturate(100%) invert(14%) sepia(93%) saturate(5480%) hue-rotate(265deg) brightness(79%) contrast(129%);
+    }
+  }
+}
+
+.sidebar ol {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar li {
+  cursor: pointer;
+}
+
+.sidebar li:active {
+  filter: brightness(0.95);
+}

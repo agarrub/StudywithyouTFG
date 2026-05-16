@@ -1,0 +1,89 @@
+<div class="container">
+  <full-calendar [options]="calendarOptions()" #calendar> </full-calendar>
+  @if (isDayClicked()) {
+    <div class="clickeable">
+      <div class="createEventForm">
+        <span class="close" (click)="isDayClicked.set(false)">&times;</span>
+        <h2>Crear evento</h2>
+        <form>
+          <label for="eventTitle">Título</label>
+          <input type="text" [formField]="createEventForm.title" />
+          <label for="eventDate">Fecha de inicio</label>
+          <input type="date" [formField]="createEventForm.startDate" />
+          <label for="eventTime">Hora</label>
+          <input type="time" [formField]="createEventForm.startTime" />
+          <label for="allDay">Todo el día</label>
+          <input
+            type="checkbox"
+            id="allDay"
+            [formField]="createEventForm.allDay"
+            (change)="this.isAllDayChecked.set(!this.isAllDayChecked())"
+          />
+          @if (!this.isAllDayChecked()) {
+            <label for="eventEndDate">Fecha de fin</label>
+            <input type="date" [formField]="createEventForm.endDate" />
+            <label for="eventEndTime">Hora de fin</label>
+            <input type="time" [formField]="createEventForm.endTime" />
+          }
+          <button type="submit" (click)="onCreateEvent($event)">Crear</button>
+        </form>
+      </div>
+    </div>
+  }
+
+  @if (isEventClicked()) {
+    <div class="clickeable">
+      <div class="eventDetails">
+        <span class="close" (click)="isEventClicked.set(false)">&times;</span>
+        <h2>Detalles del evento</h2>
+        <label for="eventTitle">Título</label>
+        <input type="text" [formField]="modifyEventForm.title" />
+        <label for="eventDate">Fecha de inicio</label>
+        <input type="date" [formField]="modifyEventForm.startDate" />
+        <label for="allDay">Todo el día</label>
+        <input
+          type="checkbox"
+          id="modifyAllDay"
+          [formField]="modifyEventForm.allDay"
+          (change)="this.isModifyAllDayChecked.set(!this.isModifyAllDayChecked())"
+        />
+        @if (!isModifyAllDayChecked()) {
+          <label for="eventTime">Hora de inicio</label>
+          <input type="time" [formField]="modifyEventForm.startTime" />
+          <label for="eventEndDate">Fecha de fin</label>
+          <input type="date" [formField]="modifyEventForm.endDate" />
+          <label for="eventEndTime">Hora de fin</label>
+          <input type="time" [formField]="modifyEventForm.endTime" />
+        }
+        <div class="actions">
+          <button type="button" (click)="onModifyEvent($event)">Guardar</button>
+          <button type="button" (click)="onDeleteEvent()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <div class="event-container">
+    <ol>
+      <h3 style="margin-bottom: 1rem;">Próximos eventos</h3>
+      @if (this.eventCount() > 0) {
+        @for (event of this.eventsList(); track $index) {
+          <li class="event">
+            <div class="event-title">{{ event.title }}</div>
+            <div class="event-date">
+              {{ event.startDate }} {{ event.startTime }} | {{ event.endDate }} {{ event.endTime }}
+            </div>
+          </li>
+        }
+      } @else {
+        <div class="no-events-container">
+          <div class="no-events-content">
+            <img src="/Homeimg/calendario.png" alt="calendar" />
+            <h2>Organiza tu tiempo, alcanza tus metas</h2>
+            <p>Cada día es una nueva oportunidad para alcanzar tus objetivos.</p>
+          </div>
+        </div>
+      }
+    </ol>
+  </div>
+</div>

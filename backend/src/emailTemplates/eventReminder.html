@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recordatorio de evento</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f7;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+      }
+      .wrapper {
+        width: 100%;
+        padding: 40px 0;
+        background-color: #f4f4f7;
+      }
+      .container {
+        max-width: 560px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        border-radius: 16px;
+        border: 1px solid #e0e0e0;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+      }
+      .header {
+        background-color: #6c3fc5;
+        padding: 30px 20px;
+        text-align: center;
+      }
+      .header img {
+        width: 48px;
+        height: 48px;
+      }
+      .header-brand {
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 8px 0 0;
+      }
+      .header h1 {
+        color: #ffffff;
+        font-size: 22px;
+        font-weight: 600;
+        margin: 4px 0 0;
+      }
+      .header .calendar-icon {
+        width: 72px;
+        height: 72px;
+        margin-top: 12px;
+      }
+      .content {
+        padding: 36px 40px;
+        text-align: center;
+      }
+      .content p {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #555555;
+        margin: 0 0 14px;
+      }
+      .highlight {
+        font-weight: 700;
+        color: #6c3fc5;
+      }
+      .event-details {
+        margin: 24px auto 0;
+        max-width: 320px;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #fafafa;
+      }
+      .detail-row {
+        padding: 14px 20px;
+        text-align: left;
+      }
+      .detail-row-border {
+        border-bottom: 1px solid #e0e0e0;
+      }
+      .detail-icon {
+        width: 28px;
+        height: 28px;
+        background-color: #6c3fc5;
+        border-radius: 6px;
+        padding: 3px;
+        vertical-align: middle;
+      }
+      .detail-label {
+        font-size: 12px;
+        color: #999999;
+        margin: 0;
+        font-weight: 300;
+      }
+      .detail-value {
+        font-size: 15px;
+        color: #1a1a2e;
+        margin: 2px 0 0;
+        font-weight: 500;
+      }
+      .footer {
+        padding: 20px;
+        text-align: center;
+        font-size: 12px;
+        color: #999999;
+      }
+    </style>
+  </head>
+  <body>
+    <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+      <tr>
+        <td align="center">
+          <table class="container" width="560" cellpadding="0" cellspacing="0" role="presentation">
+            <tr>
+              <td class="header">
+                <img src="[LOGO]" alt="Logo" />
+                <p class="header-brand">Studywithyou</p>
+                <h1>Recordatorio de evento</h1>
+                <img src="[CALENDAR_ICON]" alt="Calendario" class="calendar-icon" />
+              </td>
+            </tr>
+            <tr>
+              <td class="content">
+                <p>¡Hola, <span class="highlight">{user}</span>!</p>
+                <p>
+                  ¡A tu evento <span class="highlight">{eventName}</span> le
+                  quedan <span class="highlight">{daysLeft} días</span> para que
+                  concluya!
+                </p>
+                <table class="event-details" width="320" cellpadding="0" cellspacing="0" role="presentation">
+                  <tr>
+                    <td class="detail-row detail-row-border">
+                      <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                        <tr>
+                          <td width="36" valign="middle">
+                            <img src="[CALENDAR_ICON]" alt="Fecha" class="detail-icon" />
+                          </td>
+                          <td valign="middle" style="padding-left: 12px;">
+                            <p class="detail-label">Fecha de finalización</p>
+                            <p class="detail-value">{eventDate}</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="detail-row">
+                      <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                        <tr>
+                          <td width="36" valign="middle">
+                            <img src="[CLOCK_ICON]" alt="Hora" class="detail-icon" />
+                          </td>
+                          <td valign="middle" style="padding-left: 12px;">
+                            <p class="detail-label">Hora de finalización</p>
+                            <p class="detail-value">{eventTime}</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td class="footer">
+                StudyWithYou &copy; 2026
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

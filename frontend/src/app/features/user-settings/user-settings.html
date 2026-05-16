@@ -1,0 +1,136 @@
+<div class="container">
+  <div class="showable">
+    <aside class="options">
+      <ol>
+        <li>Perfil</li>
+      </ol>
+    </aside>
+    <div class="modifiableProfileData">
+      <div class="userHeader">
+        <div class="userHeaderInfo">
+          <h3>Información personal</h3>
+          <p>Actualiza tu información personal y de contacto.</p>
+        </div>
+        <div class="userImage">
+          <img [src]="displayAvatar" alt="Foto de perfil" />
+        </div>
+      </div>
+      <form class="userData" enctype="multipart/form-data" method="post">
+        <div class="userNameField">
+          <label for="name">Nombre</label>
+          <input type="text" [formField]="userChangeDataForm.name" />
+        </div>
+        @if (userChangeDataForm.name().touched() && userChangeDataForm.name().invalid()) {
+          <ul class="error">
+            @for (error of userChangeDataForm.name().errors(); track error) {
+              <li>{{ error.message }}</li>
+            }
+          </ul>
+        }
+
+        <div class="userLastNameField">
+          <label for="lastName">Apellidos</label>
+          <input type="text" [formField]="userChangeDataForm.lastName" />
+        </div>
+
+        <div class="userEmailField">
+          <label for="email">Correo electrónico</label>
+          <input type="email" [formField]="userChangeDataForm.email" />
+        </div>
+        @if (userChangeDataForm.email().touched() && userChangeDataForm.email().invalid()) {
+          <ul class="error">
+            @for (error of userChangeDataForm.email().errors(); track error) {
+              <li>{{ error.message }}</li>
+            }
+          </ul>
+        }
+
+        <div class="userPasswordField">
+          <label for="password">Nueva contraseña (opcional)</label>
+          <input
+            type="password"
+            [formField]="userChangeDataForm.password"
+            placeholder="Introduce una nueva contraseña"
+          />
+        </div>
+
+        <div class="userConfirmPasswordField">
+          <label for="confirmPassword">Repetir contraseña</label>
+          <input
+            type="password"
+            [formField]="userChangeDataForm.confirmPassword"
+            placeholder="Confirma la contraseña"
+          />
+        </div>
+
+        <div class="userGenderField">
+          <label for="gender">Género</label>
+          <select [formField]="userChangeDataForm.gender">
+            <option value="" disabled>Selecciona Género</option>
+            <option value="male">Hombre</option>
+            <option value="female">Mujer</option>
+            <option value="other">Otro</option>
+          </select>
+          @if (userChangeDataForm.gender().touched() && userChangeDataForm.gender().invalid()) {
+            <ul class="error">
+              @for (error of userChangeDataForm.gender().errors(); track error) {
+                <li>{{ error.message }}</li>
+              }
+            </ul>
+          }
+        </div>
+
+        <div class="userBirthDateField">
+          <label for="birthDate">Fecha de nacimiento</label>
+          <input type="date" [formField]="userChangeDataForm.birthDate" />
+          @if (
+            userChangeDataForm.birthDate().touched() && userChangeDataForm.birthDate().invalid()
+          ) {
+            <ul class="error">
+              @for (error of userChangeDataForm.birthDate().errors(); track error) {
+                <li>{{ error.message }}</li>
+              }
+            </ul>
+          }
+        </div>
+
+        <div class="uploadAvatar">
+          <div class="avatarContent">
+            <div class="avatarIcon">
+              <img src="/Settings/avatarIcon.png" alt="Icono de avatar" style="height: 1.5rem" />
+            </div>
+            <div class="avatarText">
+              <h3>Avatar</h3>
+              <p>Personalizate con una imagen de perfil</p>
+            </div>
+          </div>
+          <input
+            type="file"
+            (change)="onAvatarChange($event)"
+            style="display: none"
+            accept="image/*"
+            #avatarupload
+          />
+          <button type="button" class="upload-btn" (click)="avatarupload.click()">
+            Cambiar Avatar
+          </button>
+          @if (avatarError) {
+            <p class="error">{{ avatarError }}</p>
+          }
+        </div>
+
+        <div class="actions">
+          <button
+            type="submit"
+            class="submit-btn"
+            [disabled]="userChangeDataForm().invalid()"
+            (click)="onSubmit($event)"
+          >
+            Guardar cambios
+          </button>
+          <button type="button" class="cancel-btn" (click)="cancelUpdate()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

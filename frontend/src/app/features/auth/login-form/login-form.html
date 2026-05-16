@@ -1,0 +1,55 @@
+<div class="container">
+  <form (submit)="onSubmit($event)">
+    <label for="email">Email</label>
+    <div class="input-group email-container">
+      <input type="email" [formField]="userLoginForm.email" placeholder="Tu correo electrónico" />
+      <img src="/Loginimg/user.png" alt="User" />
+    </div>
+    @if (userLoginForm.email().touched() && userLoginForm.email().invalid()) {
+      <ul class="error">
+        @for (error of userLoginForm.email().errors(); track error) {
+          <li>{{ error.message }}</li>
+        }
+      </ul>
+    }
+
+    <label for="password">Contraseña</label>
+    <div class="input-group password-container">
+      <img src="/Loginimg/lock.png" alt="Locked" />
+      <input
+        [type]="isPasswordVisible() ? 'text' : 'password'"
+        [formField]="userLoginForm.password"
+        placeholder="Tu contraseña"
+      />
+      <button type="button" (click)="changePasswordVisibility()" class="toggle-pwd">
+        @if (isPasswordVisible()) {
+          <img src="/Loginimg/hide.png" alt="Ocultar" />
+        } @else {
+          <img src="/Loginimg/view.png" alt="Mostrar" />
+        }
+      </button>
+    </div>
+
+    @if (userLoginForm.password().touched() && userLoginForm.password().invalid()) {
+      <ul class="error">
+        @for (error of userLoginForm.password().errors(); track error) {
+          <li>{{ error.message }}</li>
+        }
+      </ul>
+    }
+
+    <button type="submit" (click)="onSubmit($event)">Iniciar Sesión</button>
+    <p class="or">o</p>
+    <div class="options">
+      <div class="loginOption">
+        <img src="/Loginimg/key.png" alt="" />
+        <a [routerLink]="['/email-to-reset']">¿Olvidaste tu contraseña?</a>
+      </div>
+
+      <div class="registerOption">
+        <img src="/Loginimg/registerUser.png" alt="" />
+        <p>¿No tienes cuenta? <a [routerLink]="['/register']">Registrarse</a></p>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,70 @@
+$bg: #384562;
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: $bg;
+  flex-grow: 1;
+  min-width: 400px;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.userHeader {
+  display: flex;
+  flex-direction: row;
+  border: 2.3px solid white;
+  border-radius: 17px;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  color: white;
+}
+
+.userOptions {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  list-style-type: none;
+  top: 50%;
+  right: 5%;
+}
+
+.userSettings {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 150px;
+}
+
+.userSelector {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: max-content;
+  cursor: pointer;
+}
+.userImage {
+  display: flex;
+  align-items: center;
+}
+.userOptions li {
+  background-color: white;
+  color: black;
+  padding: 0.7rem;
+  width: 100px;
+  height: auto;
+  cursor: pointer;
+}
+
+.userOptions li:hover {
+  background-color: black;
+  color: white;
+  transition: all 0.3s ease-in-out;
+}

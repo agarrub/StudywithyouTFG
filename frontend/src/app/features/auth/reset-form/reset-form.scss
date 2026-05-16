@@ -1,0 +1,80 @@
+$purple: #5601df;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  gap: 2rem;
+}
+
+h3 {
+  font-size: 28px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 1.5rem;
+  height: auto;
+  border: 1px solid gray;
+  width: max-content;
+  padding: 2rem 4rem;
+  border-radius: 18px;
+  background-color: white;
+}
+
+form label {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+form input {
+  font-size: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+form button {
+  font-size: 24px;
+  padding: 15px 30px;
+  border-radius: 18px;
+  border: 1px solid black;
+  background-color: whitesmoke;
+  cursor: pointer;
+  margin-top: 1rem;
+
+  &:hover:not(:disabled) {
+    background-color: $purple;
+    color: white;
+  }
+
+  &:disabled {
+    background-color: #e0e0e0;
+    color: #a0a0a0;
+    border-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+form .error {
+  color: red;
+  font-size: 16px;
+  list-style: none;
+  padding: 0;
+  align-self: flex-start;
+  margin-top: -1rem;
+}
+
+form p {
+  color: red;
+  font-size: 16px;
+  margin-top: -1rem;
+  margin-bottom: -0.5rem;
+}

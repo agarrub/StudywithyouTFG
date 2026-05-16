@@ -1,0 +1,33 @@
+<div class="container">
+    <h3>Porfavor, introduzca la nueva contraseña para restablecerla</h3>
+    <form method="post">
+        <label>Nueva contraseña:</label>
+
+        @if (userResetPasswordForm.password().touched() && userResetPasswordForm.password().invalid()) {
+        <ul class="error">
+            @for (error of userResetPasswordForm.password().errors(); track error) {
+            <li>{{ error.message }}</li>
+            }
+        </ul>
+        }
+        <input type="password" [formField]="userResetPasswordForm.password" #pass />
+
+        <label>Confirmar contraseña:</label>
+
+        @if (userResetPasswordForm.confirmPassword().touched() && userResetPasswordForm.confirmPassword().invalid()) {
+        <ul class="error">
+            @for (error of userResetPasswordForm.confirmPassword().errors(); track error) {
+            <li>{{ error.message }}</li>
+            }
+        </ul>
+        }
+        <input type="password" [formField]="userResetPasswordForm.confirmPassword" #confirmPass />
+
+        @if(pass.value !== confirmPass.value){
+        <p>Las contraseñas no coinciden</p>
+        <button type="submit" (click)="onSubmit($event)" #sendButton disabled>Enviar</button>
+        } @else {
+        <button type="submit" (click)="onSubmit($event)" #sendButton>Enviar</button>
+        }
+    </form>
+</div>

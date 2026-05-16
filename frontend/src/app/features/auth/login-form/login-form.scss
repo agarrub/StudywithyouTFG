@@ -1,0 +1,177 @@
+$purple: #5601df;
+
+
+@mixin imageOnInput() {
+  position: absolute;
+  width: 1.8rem;
+  top: 50%;
+  left: 0.5%;
+  transform: translateY(-52%);
+  opacity: 0.7;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  gap: 1.5rem;
+  height: auto;
+  border: 1px solid gray;
+  width: max-content;
+  padding: 2rem 4rem;
+  border-radius: 18px;
+  background-color: white;
+}
+
+form label {
+  font-size: 24px;
+  font-weight: 400;
+}
+
+form input {
+  font-size: 20px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+}
+
+.password-container {
+  display: flex;
+  position: relative;
+  width: 100%;
+
+  input {
+    padding-right: 50px;
+    padding-left: 40px;
+  }
+
+  img:nth-of-type(1) {
+    @include imageOnInput();
+  }
+
+  img:nth-of-type(2) {
+    @include imageOnInput();
+    width: 1.3rem;
+    left: 0.8%;
+  }
+}
+
+form button {
+  font-size: 24px;
+  padding: 15px 30px;
+  border-radius: 18px;
+  border: 1px solid black;
+  background-color: whitesmoke;
+  cursor: pointer;
+  margin-top: 1rem;
+
+  &:hover {
+    background-color: $purple;
+    color: white;
+  }
+}
+
+form .toggle-pwd {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  min-width: 0;
+  box-shadow: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+form .toggle-pwd img {
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+}
+
+form .toggle-pwd:hover img {
+  opacity: 1;
+}
+
+form a {
+  font-size: 20px;
+  margin-top: 0.5rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+form .error {
+  color: red;
+  font-size: 16px;
+  list-style: none;
+  padding: 0;
+  align-self: flex-start;
+  margin-top: -1rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.loginOption {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  img {
+    width: 1.2rem;
+  }
+}
+
+.registerOption {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  img {
+    width: 1.3rem;
+  }
+}
+
+.or {
+  width: 100%;
+  text-align: center;
+}
+
+.email-container {
+  display: flex;
+  position: relative;
+  width: 100%;
+
+  input {
+    padding-right: 50px;
+    padding-left: 40px;
+  }
+
+  img {
+    @include imageOnInput();
+  }
+}

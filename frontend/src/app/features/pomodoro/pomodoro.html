@@ -1,0 +1,110 @@
+<div class="layout">
+  <app-navigation-sidebar></app-navigation-sidebar>
+
+  <main class="main-content">
+
+    <div class="grid">
+      <section class="card timer-card">
+        <div class="time-display">
+          <span>{{ displayTime() }}</span>
+        </div>
+        <div class="controls">
+          <button type="button" class="btn btn-primary" title="Iniciar" (click)="startTimer()">
+            <img src="/Pomodoro/play.png" alt="Play" width="16" height="16" />
+          </button>
+          <button type="button" class="btn btn-secondary" title="Pausar" (click)="pauseTimer()">
+            <img src="/Pomodoro/pause.png" alt="Pause" width="16" height="16" />
+          </button>
+          <button type="button" class="btn btn-secondary" title="Reiniciar" (click)="resetTimer()">
+            <img src="/Pomodoro/stop.png" alt="Stop" width="16" height="16" />
+          </button>
+          <button type="button" class="btn btn-outline" title="Más tiempo" (click)="moreTime()">
+            <img src="/Pomodoro/plus.png" alt="More" width="16" height="16" />
+          </button>
+          <button
+            type="button"
+            class="btn btn-outline"
+            title="Menos tiempo"
+            (click)="lessTime()"
+          >
+            <img src="/Pomodoro/minus.png" alt="Minus" width="16" height="16" />
+          </button>
+        </div>
+      </section>
+
+      <section class="card video-card">
+        <div class="video-wrapper">
+          <youtube-player [videoId]="currentVideo().id" loadApi="true" [playerVars]="playerVars">
+          </youtube-player>
+        </div>
+        <div class="videoControls">
+          <button type="button" class="btn btn-outline" (click)="previousVideo()">
+            &#9664; Anterior
+          </button>
+          <button type="button" class="btn btn-outline" (click)="nextVideo()">
+            Siguiente &#9654;
+          </button>
+          <button type="button" class="btn btn-add" (click)="addVideoMenu.set(!addVideoMenu())">
+            + Añadir
+          </button>
+          <button
+            type="button"
+            class="btn btn-remove"
+            (click)="removeVideoMenu.set(!removeVideoMenu())"
+          >
+            &#128465; Eliminar
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  @if (addVideoMenu()) {
+    <div class="modal-overlay" (click)="addVideoMenu.set(false)">
+      <div class="modal" (click)="$event.stopPropagation()">
+        <button class="modal-close" (click)="addVideoMenu.set(false)">&times;</button>
+        <h3>Añadir vídeo</h3>
+        <p>Copia el link de cualquier vídeo de YouTube.</p>
+        <input
+          type="text"
+          class="modal-input"
+          placeholder="https://www.youtube.com/watch?v=..."
+          maxlength="43"
+          #videoLink
+        />
+        <input
+          type="text"
+          class="modal-input"
+          placeholder="Título del vídeo"
+          #videoTitle
+          maxlength="255"
+        />
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="addVideo(getYouTubeVideoId(videoLink.value), videoTitle.value)"
+        >
+          Añadir vídeo
+        </button>
+      </div>
+    </div>
+  }
+
+  @if (removeVideoMenu()) {
+    <div class="modal-overlay" (click)="removeVideoMenu.set(false)">
+      <div class="modal" (click)="$event.stopPropagation()">
+        <button class="modal-close" (click)="removeVideoMenu.set(false)">&times;</button>
+        <h3>Eliminar vídeo</h3>
+        <p>Selecciona el vídeo que quieres eliminar.</p>
+        <select class="modal-select" #videoSelected>
+          @for (video of videosList(); track video.id) {
+            <option value="{{ video.id }}">{{ video.title }}</option>
+          }
+        </select>
+        <button type="button" class="btn btn-remove" (click)="removeVideo(videoSelected.value)">
+          Eliminar
+        </button>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,33 @@
+<!doctype html>
+<aside class="sidebar">
+  <nav>
+    <ol>
+      <li class="home">
+        <button type="button" [routerLink]="['/']">
+          <img src="/Sidebarimg/home.png" alt="Home" style="height: 4rem" />
+          <p>Inicio</p>
+        </button>
+      </li>
+      <li class="notes">
+        <button type="button" [routerLink]="['/notes']">
+          <img src="/Sidebarimg/writing.png" alt="Notes" style="height: 4rem" />
+          <p>Apuntes</p>
+        </button>
+      </li>
+
+      <li class="pomodoro">
+        <button type="button" [routerLink]="['/pomodoro']">
+          <img src="/Sidebarimg/pomodoro.png" alt="Pomodoro" style="height: 4rem" />
+          <p>Pomodoro</p>
+        </button>
+      </li>
+
+      <li class="todo">
+        <button type="button" [routerLink]="['/todo']">
+          <img src="/Sidebarimg/to-do-list.png" alt="To-Do" style="height: 4rem" />
+          <p>To-Do</p>
+        </button>
+      </li>
+    </ol>
+  </nav>
+</aside>

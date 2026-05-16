@@ -1,0 +1,40 @@
+<!doctype html>
+
+<header class="container">
+  <div class="webIcon">
+    <img src="/HeaderImg/logo.png" alt="Logo" style="height: 5rem; width: 5rem" />
+  </div>
+  <div class="userHeader">
+    <div class="userImage">
+      @if (user()) {
+        <img
+          [src]="user()?.avatar"
+          alt="User"
+          style="height: 4rem; width: 6rem; object-fit: cover; border-radius: 50%"
+        />
+      } @else {
+        <img src="/HeaderImg/user.png" alt="User" style="width: 5rem" />
+      }
+    </div>
+
+    <div class="userSettings">
+      <div class="userSelector">
+        @if (!user()) {
+          <p routerLink="/login">Iniciar Sesión</p>
+        } @else {
+          <p (click)="toggleUserOptions()">{{ user()?.name }} ▼</p>
+        }
+      </div>
+      @if (isShown()) {
+        <nav>
+          <ol class="userOptions">
+            <li routerLink="/settings" (click)="toggleUserOptions()" style="cursor: pointer">
+              Configuración
+            </li>
+            <li (click)="logout()" style="cursor: pointer">Cerrar sesión</li>
+          </ol>
+        </nav>
+      }
+    </div>
+  </div>
+</header>

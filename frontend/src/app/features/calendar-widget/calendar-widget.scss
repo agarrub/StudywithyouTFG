@@ -1,0 +1,281 @@
+$purple: #5601df;
+
+@mixin purple-button {
+  background-color: white !important;
+  border-color: white !important;
+  color: $purple !important;
+  font-weight: bold !important;
+  font-size: 0.8rem !important;
+  border: 1px solid $purple !important;
+  border-radius: 10px !important;
+}
+
+:host {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+::ng-deep .fc {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  width: 100%;
+  height: 100% !important;
+  font-size: 0.85rem;
+}
+
+::ng-deep .fc-button {
+  padding: 0.5rem 1.5rem !important;
+  font-size: 0.85rem !important;
+  border-radius: 2rem !important;
+}
+
+::ng-deep .fc-header-toolbar {
+  text-transform: capitalize;
+}
+
+::ng-deep .fc-button-primary {
+  @include purple-button;
+  border-radius: 10px !important;
+}
+
+::ng-deep .fc-button-primary:hover {
+  background-color: $purple !important;
+  border-color: $purple !important;
+  color: white !important;
+}
+
+::ng-deep .fc-col-header-cell {
+  background-color: white !important;
+  border-radius: 10px !important;
+  border-right: none;
+  color: $purple !important;
+  font-weight: bold !important;
+  text-transform: capitalize !important;
+}
+
+::ng-deep .fc-theme-standard .fc-scrollgrid {
+  border-radius: 3px !important;
+}
+
+::ng-deep .fc-toolbar-title::before {
+  text-transform: capitalize;
+}
+
+::ng-deep .fc-daygrid-day-number {
+  font-weight: bold;
+  color: $purple;
+}
+
+full-calendar {
+  flex: 1;
+  min-width: 700px;
+  min-height: 0;
+  display: flex;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  gap: 1rem;
+  align-items: stretch;
+  overflow-x: auto;
+}
+
+.event-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 280px;
+  flex-shrink: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.event {
+  list-style-type: disc;
+  padding: 0.5rem;
+  border-bottom: 1px solid #ccc;
+  list-style: none;
+  background-color: whitesmoke;
+  gap: 2rem;
+}
+
+.eventDay {
+  padding: 1rem;
+}
+
+.events {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 1rem;
+}
+
+.clickeable {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.createEventForm {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: fit-content;
+  width: 50%;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.createEventForm h2 {
+  text-align: center;
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+.createEventForm .close {
+  position: absolute;
+  align-self: flex-end;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.createEventForm .close:hover {
+  color: red;
+}
+
+.createEventForm form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.createEventForm form input {
+  padding: 1rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+}
+
+.createEventForm form button {
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #ccc;
+  width: 30%;
+  align-self: center;
+}
+
+.createEventForm form button:hover {
+  background-color: #000000;
+  color: white;
+}
+
+.eventDetails {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: fit-content;
+  width: 50%;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.eventDetails h2 {
+  text-align: center;
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+.eventDetails .close {
+  position: absolute;
+  align-self: flex-end;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.eventDetails .close:hover {
+  color: red;
+}
+
+.eventDetails p {
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.eventDetails button {
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #ccc;
+  width: 40%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.eventDetails button:first-of-type {
+  background-color: #f0f0f0;
+}
+
+.eventDetails button:first-of-type:hover {
+  background-color: #000000;
+  color: white;
+}
+
+.eventDetails button:last-of-type {
+  background-color: #f0f0f0;
+  border-color: #cc0000;
+  color: #cc0000;
+}
+
+.eventDetails button:last-of-type:hover {
+  background-color: #cc0000;
+  color: white;
+}
+
+.no-events-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.no-events-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 100%;
+  width: 100%;
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 1rem;
+}
