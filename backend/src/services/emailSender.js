@@ -44,8 +44,8 @@ export async function sendEmail(to, subject, { templateName = 'errorEmail', even
 
     const htmlData = juice(html);
 
-    await transporter.sendMail({
-      from: { name: "Studywithyou", address: "hello@example.com" },
+    transporter.sendMail({
+      from: { name: "Studywithyou", address: process.env.NODEMAILER_USER },
       to: to,
       subject: subject,
       html: htmlData,
