@@ -1,3 +1,5 @@
+$purple: #5601df;
+
 .layout {
   display: flex;
   flex-direction: row;
@@ -132,21 +134,14 @@
   font-weight: 500;
   cursor: pointer;
   font-family: 'Segoe UI', system-ui, sans-serif;
-  transition:
-    filter 0.15s ease,
-    transform 0.1s ease;
 
   &:hover {
     filter: brightness(0.92);
   }
-
-  &:active {
-    transform: scale(0.97);
-  }
 }
 
 .btn-primary {
-  background-color: #e05a3a;
+  background-color: $purple;
   color: #fff;
 }
 
@@ -173,8 +168,8 @@
 }
 
 .btn-remove {
-  background-color: #fdecea;
-  color: #c0392b;
+  background-color: $purple;
+  color: white;
   font-weight: 600;
 }
 
@@ -240,7 +235,6 @@
   box-sizing: border-box;
   color: #2d2d2d;
   outline: none;
-  transition: border-color 0.2s;
 
   &:focus {
     border-color: #5b8dee;

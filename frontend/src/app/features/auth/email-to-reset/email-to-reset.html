@@ -4,10 +4,13 @@
       <label>Introduzca el correo electrónico</label>
       <input type="email" [formField]="emailToResetForm.email" />
       <button type="submit" (click)="onSubmit($event)">Enviar</button>
+      @
     </form>
     <div class="links">
-        <img src="/EmailToResetimg/user.png" alt="User" />
-        <p>¿Ya tienes cuenta? <a [routerLink]="['/login']"><span>Inicia sesión</span></a></p>
+      <img src="/EmailToResetimg/user.png" alt="User" />
+      <p>
+        ¿Ya tienes cuenta? <a [routerLink]="['/login']"><span>Inicia sesión</span></a>
+      </p>
     </div>
   </section>
 </div>
