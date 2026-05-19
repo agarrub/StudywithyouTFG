@@ -2,7 +2,7 @@
 <div class="layout">
   <app-navigation-sidebar></app-navigation-sidebar>
   @if (!isNoteSelected()) {
-    <div class="notes-section">
+    <section class="notes-section">
       <button class="new-note-button" (click)="newNoteTouched.set(true)">Nueva nota</button>
       <div class="notes-container">
         @if (newNoteTouched()) {
@@ -26,8 +26,12 @@
                 <div class="rename-note">
                   <input type="text" placeholder="Nuevo título" [value]="note.title" #newTitle />
                   <div class="rename-note-buttons">
-                    <button class="rename-confirm" (click)="renameNote(note.id, newTitle.value)">Renombrar</button>
-                    <button class="rename-cancel" (click)="renamingNoteId.set(null)">Cancelar</button>
+                    <button class="rename-confirm" (click)="renameNote(note.id, newTitle.value)">
+                      Renombrar
+                    </button>
+                    <button class="rename-cancel" (click)="renamingNoteId.set(null)">
+                      Cancelar
+                    </button>
                   </div>
                 </div>
               </div>
@@ -35,9 +39,9 @@
           </div>
         }
       </div>
-    </div>
+    </section>
   } @else {
-    <div class="note-container">
+    <section class="note-container">
       @defer (when isNoteSelected()) {
         <div class="editor-top">
           <div class="editor-header">
@@ -90,6 +94,6 @@
           <p>Error al cargar el editor</p>
         </div>
       }
-    </div>
+    </section>
   }
 </div>
