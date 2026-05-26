@@ -59,7 +59,7 @@ authRouter.post('/register', upload.single('avatar'), validateUserRegister, asyn
       [userID, token, request_time, expire_time, 'create_account', false],
     );
 
-    const createLink = `http://localhost:3000/auth/confirm_email/${token}`;
+    const createLink = `${process.env.BACKEND_URL}/auth/confirm_email/${token}`;
 
     await sendEmail(email, 'Registro de correo', {
       templateName: 'createAccount',
@@ -165,7 +165,7 @@ authRouter.get('/user', validateUserJWT, async (req, res) => {
     if (users.length !== 0) {
       const user = users[0];
       if (user.avatar) {
-        user.avatar = `http://localhost:3000/profileUploads/${user.avatar}`;
+        user.avatar = `${process.env.BACKEND_URL}/profileUploads/${user.avatar}`;
       } else {
         user.avatar = '/HeaderImg/user.png';
       }
@@ -221,7 +221,7 @@ authRouter.post('/forgot-password', async (req, res) => {
       [user.id, token, request_time, expire_time, action, false],
     );
 
-    const createLink = `http://localhost:4200/reset-form?token=${token}`;
+    const createLink = `${process.env.FRONTEND_URL}/reset-form?token=${token}`;
     await sendEmail(user.email, 'Reinicia tu contraseña', {
       templateName: 'passwordReset',
       link: createLink,

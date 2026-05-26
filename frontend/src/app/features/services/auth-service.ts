@@ -3,12 +3,13 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { UserLogin } from '../../core/models/user-login';
 import { UserInfo } from '../../core/models/user-info';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private readonly url: string = 'http://localhost:3000';
+  private readonly url: string = environment.apiUrl;
 
   public http: HttpClient = inject(HttpClient);
 

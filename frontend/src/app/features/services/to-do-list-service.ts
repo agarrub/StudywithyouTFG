@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { TodoList, TodoListItem } from '../../core/models/todo-list-item';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 export class ToDoListService {
   private http = inject(HttpClient);
 
-  private url = 'http://localhost:3000/todolist';
+  private url = `${environment.apiUrl}/todolist`;
 
   public selectedList = signal<TodoList | null>(null);
 

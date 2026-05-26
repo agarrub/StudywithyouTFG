@@ -2,6 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { Note, NoteResponse } from '../../core/models/notes';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class NotesService {
   public notes = signal<Note[]>([]);
   private http = inject(HttpClient);
-  private readonly url = 'http://localhost:3000/notes';
+  private readonly url = `${environment.apiUrl}/notes`;
 
   public readonly getNotes = (): Observable<NoteResponse> => {
     return this.http.get<NoteResponse>(`${this.url}/`, { withCredentials: true });

@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CreateEvent, CreateEventResponse } from '../../core/models/create-event';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
-  private readonly url: string = 'http://localhost:3000';
+  private readonly url: string = environment.apiUrl;
 
   public http: HttpClient = inject(HttpClient);
 

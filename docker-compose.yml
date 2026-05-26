@@ -1,0 +1,57 @@
+services:
+  db:
+    image: mysql:8.0
+    container_name: studywithyou-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: 102734
+      MYSQL_DATABASE: studywithyou
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: studywithyou-backend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASSWORD: 102734
+      DB_NAME: studywithyou
+      DB_PORT: 3306
+      NODE_ENV: production
+      FRONTEND_URL: http://localhost
+      BACKEND_URL: http://localhost/api
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./backend/.env:/app/backend/.env
+      - profile_uploads:/app/backend/profileUploads
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: studywithyou-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
+  profile_uploads:
