@@ -81,6 +81,11 @@ $purple: #5601df;
 .new-note button {
   @include buttonDesign;
   background-color: #2e01f8;
+
+  &:nth-child(3){
+    background-color: red;
+    color: white;
+  }
 }
 
 .new-note button:hover {

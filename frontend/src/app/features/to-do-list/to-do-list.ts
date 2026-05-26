@@ -1,5 +1,4 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { AuthService } from '../services/auth-service';
 import { TodoList, TodoListItem } from '../../core/models/todo-list-item';
 import { ToDoListService } from '../services/to-do-list-service';
 import { NavigationSidebar } from '../navigation-sidebar/navigation-sidebar';

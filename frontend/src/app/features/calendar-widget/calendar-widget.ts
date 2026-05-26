@@ -86,6 +86,7 @@ export class CalendarWidget implements OnInit {
     weekends: true,
     editable: true,
     events: [],
+    droppable: false,
     dateClick: (info: any) => {
       this.isDayClicked.set(true);
 

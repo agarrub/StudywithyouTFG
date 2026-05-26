@@ -32,8 +32,9 @@ $bg: #384562;
   position: absolute;
   flex-direction: column;
   list-style-type: none;
-  top: 50%;
-  right: 5%;
+  top: 90%;
+  right: 15%;
+  width: fit-content;
 }
 
 .userSettings {
@@ -58,7 +59,7 @@ $bg: #384562;
   background-color: white;
   color: black;
   padding: 0.7rem;
-  width: 100px;
+  width: 120px;
   height: auto;
   cursor: pointer;
 }

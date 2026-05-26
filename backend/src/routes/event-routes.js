@@ -159,7 +159,7 @@ eventRouter.put('/update-event', validateUserJWT, validateEvent, async (req, res
 
 cron.schedule('* * * * *', async () => {
   try {
-    console.log('Cron funcionando a las:', new Date());
+    console.log('Cron funcionando a las:', new Date().toLocaleString());
     const [events] = await pool.query(
       'SELECT * FROM events WHERE DATE(end_datetime) <= DATE_ADD(CURDATE(), INTERVAL 3 DAY)',
     );

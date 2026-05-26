@@ -13,21 +13,21 @@ export class EmailToReset {
   private auth = inject(AuthService);
   private router = inject(Router);
 
-  emailToResetModel = signal<{email: ''}>;
+  emailToResetModel = signal<{ email: '' }>;
 
-  emailToResetForm = form(this.emailToResetModel({email: ''}), (schema) => {
-    required(schema.email, {message: 'Email is required'})
-    email(schema.email, {message: 'Email is not valid'})
-  })
+  emailToResetForm = form(this.emailToResetModel({ email: '' }), (schema) => {
+    required(schema.email, { message: 'Email is required' });
+    email(schema.email, { message: 'Email is not valid' });
+  });
 
-  onSubmit($event: Event){
+  onSubmit($event: Event) {
     $event.preventDefault();
 
     const data = this.emailToResetForm().value();
 
     this.auth.forgotPassword(data.email).subscribe({
       next: () => {
-        this.router.navigate(['/reset-password-executed']);
+        this.router.navigate(['/reset-executed']);
       },
       error: (error) => {
         alert(error.message);
