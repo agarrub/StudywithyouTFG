@@ -4,16 +4,17 @@ import { pool } from "../config/db.connection.js";
 export const notesRouter = Router();
 
 notesRouter.post('/create', validateUserJWT, async (req, res) => {
-    const { id, title, userID } = req.body;
+    const { id, title } = req.body;
+    const userID = req.user.id;
 
-    if (!id || !title || !userID) {
+    if (!id || !title) {
         return res.status(400).json({ message: 'Campos vacíos.' });
     }
 
     try {
         const [result] = await pool.query(
-            `INSERT INTO notes (id, title, userID, created_at, last_modified) VALUES (?,?,?,NOW(),NOW())`,
-            [id, title, userID]
+            `INSERT INTO notes (id, title, content, userID, created_at, last_modified) VALUES (?,?,?,?,NOW(),NOW())`,
+            [id, title, '', userID]
         );
 
         if (!result.affectedRows) {
