@@ -64,10 +64,12 @@ authRouter.post('/register', upload.single('avatar'), validateUserRegister, asyn
     await sendEmail(email, 'Registro de correo', {
       templateName: 'createAccount',
       link: createLink,
-      user: name
+      user: name,
     });
 
-    return res.status(201).json({ message: 'Usuario registrado correctamente, por favor revisa tu correo' });
+    return res
+      .status(201)
+      .json({ message: 'Usuario registrado correctamente, por favor revisa tu correo' });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Internal server error' });
@@ -140,6 +142,18 @@ authRouter.post('/login', validateUserLogin, async (req, res) => {
       return res.status(400).json({ message: 'Credenciales inválidas.' });
     }
 
+    const [actions] = await pool.query(
+      `SELECT is_used FROM actions WHERE userID = ? AND action = 'create_account'`,
+      [user.id],
+    );
+
+    if (actions.length > 0) {
+      const isVerified = actions[0].is_used;
+      if (!isVerified) {
+        return res.status(403).json({ message: 'Por favor, verifica tu correo antes de iniciar sesión.' });
+      }
+    }
+
     const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_PRIVATE_KEY, {
       expiresIn: '12h',
     });
@@ -207,7 +221,9 @@ authRouter.post('/forgot-password', async (req, res) => {
   try {
     const [users] = await pool.query(`SELECT * FROM users WHERE email = ?`, [email]);
     if (users.length === 0) {
-      return res.status(200).json({ message: 'Si el correo existe, se ha enviado un enlace de restablecimiento' });
+      return res
+        .status(200)
+        .json({ message: 'Si el correo existe, se ha enviado un enlace de restablecimiento' });
     }
     const user = users[0];
 
@@ -225,10 +241,12 @@ authRouter.post('/forgot-password', async (req, res) => {
     await sendEmail(user.email, 'Reinicia tu contraseña', {
       templateName: 'passwordReset',
       link: createLink,
-      user: user.name
+      user: user.name,
     });
 
-    res.status(200).json({ message: 'Si el correo existe, se ha enviado un enlace de restablecimiento' });
+    res
+      .status(200)
+      .json({ message: 'Si el correo existe, se ha enviado un enlace de restablecimiento' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
