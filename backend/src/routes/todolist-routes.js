@@ -76,7 +76,7 @@ todoListRouter.get('/task/:listID', validateUserJWT, async (req, res) => {
   const { listID } = req.params;
   try {
     const [result] = await pool.query('SELECT id, task, is_done as done FROM todo_item WHERE list_id = ?', [listID]);
-    const tasks = result.map(task => ({ ...task, done: !Boolean(task.done), id: task.id.toString() }));
+    const tasks = result.map(task => ({ ...task, done: Boolean(task.done), id: task.id.toString() }));
     res.status(200).json(tasks);
   } catch (error) {
     console.error(error);
